@@ -3,9 +3,7 @@ const ingresos = [
   new Ingreso("Venta Auto", 1500.0),
 ];
 
-const egresos = [
-    new Egreso("Alquiler", 1000.0), 
-    new Egreso("Ropa", 500.0)];
+const egresos = [new Egreso("Alquiler", 1000.0), new Egreso("Ropa", 500.0)];
 
 let cargarApp = () => {
   cargarCabecero();
@@ -42,9 +40,9 @@ let cargarCabecero = () => {
 };
 
 const formatoMoneda = (valor) => {
-  return valor.toLocaleString("en-US", {
+  return valor.toLocaleString("es-ES", {
     style: "currency",
-    currency: "USD",
+    currency: "EUR",
     minimumFractionDigits: 2,
   });
 };
@@ -91,11 +89,11 @@ const cargarEgresos = () => {
 };
 
 const eliminarIngreso = (id) => {
-let indiceEliminar= ingresos.findIndex(ingreso => ingreso.id ===id);
-ingresos.splice(indiceEliminar,1);
-cargarCabecero();
-cargarIngresos();
-}
+  let indiceEliminar = ingresos.findIndex((ingreso) => ingreso.id === id);
+  ingresos.splice(indiceEliminar, 1);
+  cargarCabecero();
+  cargarIngresos();
+};
 
 const crearEgresoHTML = (egreso) => {
   let egresoHTML = `
@@ -103,10 +101,14 @@ const crearEgresoHTML = (egreso) => {
     <div class="elemento_descripcion">${egreso.descripcion}</div>
     <div class="derecha limpiarEstilos">
       <div class="elemento_valor">- ${formatoMoneda(egreso.valor)}</div>
-      <div class="elemento_porcentaje">${formatoPorcentaje (egreso.valor/totalEgresos())}
+      <div class="elemento_porcentaje">${formatoPorcentaje(
+        egreso.valor / totalEgresos()
+      )}
       </div>
       <div class="elemento_eliminar">
-      <button class="elemento_eliminar--btn" onclick='eliminarEgreso(${egreso.id})'>
+      <button class="elemento_eliminar--btn" onclick='eliminarEgreso(${
+        egreso.id
+      })'>
       <ion-icon name="close-circle-outline"></ion-icon>
     </button>
       </div>
@@ -117,9 +119,30 @@ const crearEgresoHTML = (egreso) => {
 };
 
 const eliminarEgreso = (id) => {
-    let indiceEliminar = egresos.findIndex(egreso => egreso.id === id);
-    egresos.splice(indiceEliminar, 1);
-    cargarCabecero();
-    cargarEgresos();
+  let indiceEliminar = egresos.findIndex((egreso) => egreso.id === id);
+  egresos.splice(indiceEliminar, 1);
+  cargarCabecero();
+  cargarEgresos();
+};
+
+let agregarDato = () => {
+  let forma = document.forms["forma"];
+  let tipo = forma["tipo"];
+  let descripcion = forma["descripcion"];
+  let valor = forma["valor"];
+  // recupero los valores de html
+  if (descripcion.value !== " " && valor.value !== " ") {
+    if (tipo.value === "ingreso") {
+        ingresos.push (new Ingreso(descripcion.value, +valor.value));
+        // al poner el + adelante, convierte en valor numerico
+        cargarCabecero();
+        cargarIngresos();
+    } else if (tipo.value === "egreso") {
+        egresos.push ( new Egreso(descripcion.value, +valor.value));
+        cargarCabecero();
+        cargarEgresos();
+    }
+    descripcion.value = "";
+    valor.value = "";
   }
-  
+};
