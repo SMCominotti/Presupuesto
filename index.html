@@ -27,12 +27,31 @@
         </div>
       </div>
     </div>
-<!-- esto se hace para ir viendo, pero luego se reemplaza por JS -->
+
+    <form id="forma" onsubmit="return false;">
+      <!-- el return false es para que no se pierda la informacion, porque en este momento no se envia a un servidor y no quiero perderlo -->
+      <div class="agregar">
+        <div class="agregar_contenedor">
+          <select class="agregar_tipo" id="tipo">
+            <option value="ingreso" selected>+</option>
+            <option value="egreso" selected>-</option>
+          </select>
+          <input type="text" class="agregar_descripcion" placeholder="Agregar Descripción" id="descripcion"/>
+          <input type="number" class="agregar_valor" placeholder="Valor" id="valor" step="any"/> 
+          <!-- el any es para tambien poder agregar decimales. -->
+          <button type="button" class="agregar_btn" onclick="agregarDato()">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+
     <div class="contenedor limpiarEstilos">
       <div class="ingreso">
         <h2 class="ingreso_titulo"> Ingresos </h2>
         <div id="lista-ingresos">
-          <div class="elemento limpiarEstilos">
+          <!-- esto se hace para ir viendo, pero luego se reemplaza por JS -->
+          <!-- <div class="elemento limpiarEstilos">
             <div class="elemento_descripcion">Salario</div>
             <div class="derecha limpiarEstilos">
               <div class="elemento_valor">+ 2,200.00</div>
@@ -42,8 +61,8 @@
                 </button>
               </div>
             </div>
-          </div>
-          <div class="elemento limpiarEstilos">
+          </div> -->
+          <!-- <div class="elemento limpiarEstilos">
             <div class="elemento_descripcion">Venta Auto</div>
             <div class="derecha limpiarEstilos">
               <div class="elemento_valor">+ 1,500.00</div>
@@ -53,13 +72,13 @@
                 </button>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="egreso">
         <h2 class="egreso_titulo">Egresos</h2>
         <div id="lista-egresos">
-          <div class="elemento limpiarEstilos">
+          <!-- <div class="elemento limpiarEstilos">
             <div class="elemento_descripcion">Alquiler</div>
             <div class="derecha limpiarEstilos">
               <div class="elemento_valor">-900.00</div>
@@ -70,8 +89,8 @@
                 </button>
               </div>
             </div>
-          </div>
-          <div class="elemento limpiarEstilos">
+          </div> -->
+          <!-- <div class="elemento limpiarEstilos">
             <div class="elemento_descripcion">Ropa</div>
             <div class="derecha limpiarEstilos">
               <div class="elemento_valor">-400.00</div>
@@ -82,11 +101,10 @@
                 </button>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
-
     <script src="js/Dato.js"></script>
     <script src="js/Ingreso.js"></script>
     <script src="js/Egreso.js"></script>
